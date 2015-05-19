@@ -22,7 +22,7 @@ class BuildReport
   end
 
   def token
-    ENV["HOUND_GITHUB_TOKEN"]
+    ENV.fetch("HOUND_GITHUB_TOKEN")
   end
 
   def violations
