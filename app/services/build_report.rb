@@ -3,7 +3,11 @@ require "attr_extras"
 class BuildReport
   MAX_COMMENTS = ENV.fetch("MAX_COMMENTS").to_i
 
-  static_facade :run, :pull_request, :build
+  def self.run(pull_request, build)
+    new(pull_request, build).run
+  end
+
+  pattr_initialize :pull_request, :build
 
   def run
     commenter.comment_on_violations(priority_violations)
