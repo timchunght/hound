@@ -3,18 +3,6 @@ require "rails_helper"
 describe BuildReport do
   describe ".run" do
     context "when build has violations" do
-      it "comments on violations" do
-        build = create(:build, :failed)
-        commenter = stubbed_commenter
-        stubbed_github_api
-        pull_request = stubbed_pull_request
-
-        BuildReport.run(pull_request, build)
-
-        expect(commenter).to have_received(:comment_on_violations).
-          with(build.violations)
-      end
-
       it "comments a maximum number of times" do
         stub_const("::BuildReport::MAX_COMMENTS", 1)
         commenter = double("Commenter", comment_on_violations: true)
