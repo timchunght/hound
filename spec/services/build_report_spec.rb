@@ -5,10 +5,8 @@ describe BuildReport do
     context "when build has violations" do
       it "comments a maximum number of times" do
         stub_const("::BuildReport::MAX_COMMENTS", 1)
-        commenter = double("Commenter", comment_on_violations: true)
-        allow(Commenter).to receive(:new).and_return(commenter)
+        commenter = stubbed_commenter(comment_on_violations: true)
         build = create(:build, violations: build_list(:violation, 2))
-        commenter = stubbed_commenter
         stubbed_github_api
         pull_request = stubbed_pull_request
 
@@ -61,8 +59,8 @@ describe BuildReport do
       end
     end
 
-    def stubbed_commenter
-      commenter = double(:commenter).as_null_object
+    def stubbed_commenter(options = {})
+      commenter = double(:commenter, options).as_null_object
       allow(Commenter).to receive(:new).and_return(commenter)
 
       commenter
