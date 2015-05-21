@@ -23,7 +23,6 @@ describe BuildReport do
           commit_sha: "headsha",
           repo: repo,
           violations: [
-            build(:violation),
             build(:violation, messages: ["wrong", "bad"]),
           ],
         )
@@ -36,7 +35,7 @@ describe BuildReport do
         expect(github_api).to have_received(:create_success_status).with(
           "test/repo",
           "headsha",
-          "3 violations found."
+          "2 violations found."
         )
       end
     end
