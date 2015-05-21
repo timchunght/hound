@@ -27,7 +27,7 @@ describe BuildRunner, '#run' do
       expect(build.commit_sha).to eq payload.head_sha
     end
 
-    it 'comments on violations' do
+    it "runs the BuildReport to finalize the build" do
       build_runner = make_build_runner
       stubbed_github_api
       pull_request = stubbed_pull_request
